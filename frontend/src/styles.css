@@ -1,10 +1,15 @@
-/* Design tokens: "Old photograph". Components use tokens only, never raw colours. */
+/* Design tokens: "Cotton candy skies".
+   Palette: #B298E7 lavender, #B8E3E9 powder blue, #F5B8D5 pink, #F9BEDD blush.
+   The pastels are too light to carry text, so they are used for surfaces and shapes
+   (dark text on top); --accent is a deeper violet for text, links and buttons.
+   Components use tokens only, never raw colours. */
 :root {
-  --bg: #fdfbd4; --surface: #fffef0; --text: #2a2919; --muted: #5c5b45;
-  --accent: #545333; --on-accent: #fffef0; --border: #d9d7b6; --input-border: #878672;
-  --hero-bg: #2a2919; --hero-text: #fdfbd4; --bar: #d9d7b6; --tint: #f3f0bd;
-  --critical: #b3261e; --warning: #8f5a08; --info: #3b6e91; --good: #3d6b2c;
-  --block: #e9e6b8; /* decorative shapes only, never behind text */
+  --lavender: #B298E7; --powder: #B8E3E9; --pink: #F5B8D5; --blush: #F9BEDD;
+  --bg: #fff7fb; --surface: #ffffff; --text: #231a33; --muted: #5a4a73;
+  --accent: #5b3fa0; --on-accent: #ffffff; --border: #F5B8D5; --input-border: #8468c4;
+  --hero-bg: var(--lavender); --hero-text: #231a33; --tint: #e3f4f7;
+  --critical: #b3261e; --warning: #8a5300; --info: #1f6b8a; --good: #2b6b3f;
+  --block: var(--blush); /* decorative shapes only, never behind text */
   --font-ui: "DM Sans", system-ui, sans-serif;
   --font-display: "Crimson Text", Georgia, serif;
   --font-mono: "DM Mono", ui-monospace, monospace;
@@ -12,11 +17,11 @@
   --t: 150ms ease;
 }
 :root[data-theme="dark"] {
-  --bg: #1c1c12; --surface: #25251a; --text: #fdfbd4; --muted: #b9b79a;
-  --accent: #d9d7b6; --on-accent: #1c1c12; --border: #3a3a2a; --input-border: #8a8970;
-  --hero-bg: #12120b; --hero-text: #fdfbd4; --bar: #d9d7b6; --tint: #2f2f20;
-  --critical: #e86a62; --warning: #d9a520; --info: #6ba3c9; --good: #8fc27a;
-  --block: #2f2f20;
+  --bg: #1b1428; --surface: #251c36; --text: #f6eefa; --muted: #c3b5d9;
+  --accent: #B298E7; --on-accent: #1b1428; --border: #3d2f57; --input-border: #8b78b0;
+  --hero-bg: var(--lavender); --hero-text: #1b1428; --tint: #33264a;
+  --critical: #ff8a80; --warning: #f2c14e; --info: #7cc4de; --good: #8fd19e;
+  --block: #4a3466;
 }
 
 * { box-sizing: border-box; }
@@ -61,15 +66,15 @@ tr:last-child td { border-bottom: 0; }
 /* Hero + bento tiles */
 .hero { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
 .hero-panel { background: var(--hero-bg); color: var(--hero-text); border-radius: var(--radius); padding: 24px; display: grid; gap: 8px; }
-.hero-label { font-size: 0.8125rem; opacity: 0.85; }
+.hero-label { font-size: 0.8125rem; }
 .hero-number { font: 600 clamp(3rem, 7vw, 4.5rem)/1 var(--font-display); }
 .bars { margin: 8px 0 0; }
 .bars svg { width: 100%; height: 120px; display: block; }
-.bars rect { fill: var(--bar); transform-origin: bottom; transform-box: fill-box; animation: rise 600ms ease-out both; }
-.bars-axis { display: flex; justify-content: space-between; font: 0.75rem var(--font-mono); opacity: 0.85; }
+.bars rect { fill: var(--hero-text); transform-origin: bottom; transform-box: fill-box; animation: rise 600ms ease-out both; }
+.bars-axis { display: flex; justify-content: space-between; font: 0.75rem var(--font-mono); }
 @keyframes rise { from { transform: scaleY(0); } }
 .tiles { display: grid; gap: 16px; }
-.tile { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; display: grid; gap: 4px; align-content: center; }
+.tile { background: var(--surface); border: 1px solid var(--border); border-top: 4px solid var(--powder); border-radius: var(--radius); padding: 16px 20px; display: grid; gap: 4px; align-content: center; }
 .tile-label { font-size: 0.8125rem; color: var(--muted); }
 .tile-value { font: 600 2rem/1.1 var(--font-display); }
 

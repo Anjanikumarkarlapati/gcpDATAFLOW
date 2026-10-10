@@ -50,7 +50,7 @@ python -m scripts.generate_sample_data   # optional: regenerate the sample data
 cd frontend && npm install && npm run dev
 ```
 
-Plain CSS on design tokens (light/dark via `data-theme`), status always shown as colour + icon + word,
+Plain CSS on design tokens, "Cotton candy skies" palette (light/dark via `data-theme`), status always shown as colour + icon + word,
 44px touch targets, reduced-motion respected. It reads `public/sample-data.json`; for live data, serve
 `page_metrics_5m_latest` through a small read-only API and point `src/data.js` at it. Looker Studio
 remains the PRD's official dashboard.
