@@ -1,0 +1,25 @@
+{
+  "displayName": "Clickstream: Dataflow system lag",
+  "combiner": "OR",
+  "documentation": {
+    "content": "System lag >2 min.",
+    "mimeType": "text/markdown"
+  },
+  "conditions": [
+    {
+      "displayName": "Clickstream: Dataflow system lag",
+      "conditionThreshold": {
+        "filter": "metric.type=\"dataflow.googleapis.com/job/system_lag\" resource.type=\"dataflow_job\" metadata.user_labels.\"job_name\"=\"clickstream-aggregation\"",
+        "comparison": "COMPARISON_GT",
+        "thresholdValue": 120,
+        "duration": "300s",
+        "aggregations": [
+          {
+            "alignmentPeriod": "60s",
+            "perSeriesAligner": "ALIGN_MEAN"
+          }
+        ]
+      }
+    }
+  ]
+}

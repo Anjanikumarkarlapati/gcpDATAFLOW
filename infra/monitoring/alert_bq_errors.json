@@ -1,0 +1,25 @@
+{
+  "displayName": "Clickstream: Dataflow job errors",
+  "combiner": "OR",
+  "documentation": {
+    "content": "Errors in Dataflow logs, incl. BigQuery insert failures.",
+    "mimeType": "text/markdown"
+  },
+  "conditions": [
+    {
+      "displayName": "Clickstream: Dataflow job errors",
+      "conditionThreshold": {
+        "filter": "metric.type=\"logging.googleapis.com/log_entry_count\" resource.type=\"dataflow_job\" metric.label.\"severity\"=\"ERROR\"",
+        "comparison": "COMPARISON_GT",
+        "thresholdValue": 0,
+        "duration": "120s",
+        "aggregations": [
+          {
+            "alignmentPeriod": "60s",
+            "perSeriesAligner": "ALIGN_RATE"
+          }
+        ]
+      }
+    }
+  ]
+}

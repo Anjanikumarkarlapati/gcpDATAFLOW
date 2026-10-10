@@ -1,0 +1,25 @@
+{
+  "displayName": "Clickstream: dead-letter volume",
+  "combiner": "OR",
+  "documentation": {
+    "content": "Dead-letter events/sec above threshold (target <1% of traffic). Verify the metric name in Metrics Explorer for your job; inspect clickstream.dead_letters.",
+    "mimeType": "text/markdown"
+  },
+  "conditions": [
+    {
+      "displayName": "Clickstream: dead-letter volume",
+      "conditionThreshold": {
+        "filter": "metric.type=\"custom.googleapis.com/dataflow/dead_letter_events\" resource.type=\"dataflow_job\"",
+        "comparison": "COMPARISON_GT",
+        "thresholdValue": 10,
+        "duration": "300s",
+        "aggregations": [
+          {
+            "alignmentPeriod": "60s",
+            "perSeriesAligner": "ALIGN_RATE"
+          }
+        ]
+      }
+    }
+  ]
+}

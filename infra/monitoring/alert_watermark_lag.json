@@ -1,0 +1,25 @@
+{
+  "displayName": "Clickstream: data watermark age",
+  "combiner": "OR",
+  "documentation": {
+    "content": "Watermark >10 min behind; windows are not closing. Check stuck stages / hot keys.",
+    "mimeType": "text/markdown"
+  },
+  "conditions": [
+    {
+      "displayName": "Clickstream: data watermark age",
+      "conditionThreshold": {
+        "filter": "metric.type=\"dataflow.googleapis.com/job/data_watermark_age\" resource.type=\"dataflow_job\"",
+        "comparison": "COMPARISON_GT",
+        "thresholdValue": 600,
+        "duration": "300s",
+        "aggregations": [
+          {
+            "alignmentPeriod": "60s",
+            "perSeriesAligner": "ALIGN_MEAN"
+          }
+        ]
+      }
+    }
+  ]
+}
