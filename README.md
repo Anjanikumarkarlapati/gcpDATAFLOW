@@ -17,6 +17,8 @@ Pub/Sub clickstream-sub
 | Path | Purpose |
 |---|---|
 | `clickstream/` | Pipeline package (parsing, sketch, aggregation, late routing, pipeline entry point) |
+| `frontend/` | React 19 + Vite dashboard (Overview, Data quality, How it works) using bundled sample data |
+| `scripts/generate_sample_data.py` | Runs the real pipeline transforms over a simulated hour of traffic and writes `frontend/public/sample-data.json` and `sample_data/events.jsonl` |
 | `producer/publisher.py` | Simulated traffic incl. late, duplicate and malformed events |
 | `tests/` | Unit tests + `TestStream` tests for early/on-time/late panes, dedup, too-late and dead letters |
 | `infra/bigquery/` | Table schemas and `create_tables.sh` (also creates the `_latest` view) |
@@ -40,6 +42,18 @@ python -m producer.publisher --project $PROJECT --rate 20 --duration 600 \
   --late-fraction 0.05 --duplicate-fraction 0.02 --malformed-fraction 0.01
 infra/monitoring/create_alerts.sh
 ```
+
+## Dashboard (sample data)
+
+```bash
+python -m scripts.generate_sample_data   # optional: regenerate the sample data
+cd frontend && npm install && npm run dev
+```
+
+Plain CSS on design tokens (light/dark via `data-theme`), status always shown as colour + icon + word,
+44px touch targets, reduced-motion respected. It reads `public/sample-data.json`; for live data, serve
+`page_metrics_5m_latest` through a small read-only API and point `src/data.js` at it. Looker Studio
+remains the PRD's official dashboard.
 
 ## Design decisions
 
